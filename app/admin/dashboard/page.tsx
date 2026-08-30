@@ -162,7 +162,7 @@ export default function Dashboard() {
                       {p.status.replace('_', ' ')}
                     </span>
                   </td>
-                  <td style={{ fontSize: '0.78rem', color: 'var(--gray2)' }}>{new Date(p.created_at).toLocaleDateString()}</td>
+                  <td style={{ fontSize: '0.78rem', color: 'var(--gray2)' }}>{new Date(p.created_at).toLocaleDateString('en-US', { timeZone: 'UTC' })}</td>
                   <td><button className="btn-view" onClick={() => openProject(p)}>View →</button></td>
                 </tr>
               ))}
