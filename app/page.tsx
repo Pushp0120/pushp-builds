@@ -458,7 +458,7 @@ export default function Home() {
           <a href="#about">About</a><a href="#services">Services</a>
           <a href="#pricing">Pricing</a><a href="#order">Contact</a><a href="/admin">Admin</a>
         </div>
-        <div className="footer-copy">© {new Date().getFullYear()} pushp-builds. Made with ♥</div>
+        <div className="footer-copy">© 2026 pushp-builds. Made with ♥</div>
       </footer>
 
       {toast.show && <div className={`toast ${toast.type}`}>{toast.text}</div>}
