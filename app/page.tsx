@@ -1,9 +1,10 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import ThreeBackground from './components/ThreeBackground'
 
 const STATUS_COLORS: Record<string, string> = {
   pending: '#f59e0b', reviewing: '#3b82f6', quoted: '#8b5cf6',
-  accepted: '#06b6d4', in_progress: '#ff6b35', completed: '#00d4aa', rejected: '#ef4444'
+  accepted: '#06b6d4', in_progress: '#10b981', completed: '#059669', rejected: '#ef4444'
 }
 
 export default function Home() {
@@ -129,6 +130,25 @@ export default function Home() {
     ['🔧', 'Bug Fixing', 'Fix broken websites, debug code, or optimize slow-loading pages.', 'From ₹299', '', ''],
   ]
 
+  const projects = [
+    {
+      title: 'Talk N Tea',
+      description: 'Premium cafe website with menu, gallery, reviews, and location features. A complete digital presence for a local business.',
+      tags: ['Next.js', 'React', 'Full-Stack', 'Business Website'],
+      link: 'https://talknteaofficial.vercel.app/',
+      featured: true,
+      color: '#10b981'
+    },
+    {
+      title: 'Vasudhara Milk',
+      description: 'E-commerce platform for dairy products with payment integration and order management.',
+      tags: ['E-Commerce', 'PHP', 'MySQL', 'Payment Gateway'],
+      link: 'https://github.com/Pushp0120/vasudhara_milk',
+      featured: false,
+      color: '#059669'
+    }
+  ]
+
   const plans = [
     { name: 'Starter', range: '₹600 – ₹800', desc: 'Perfect for simple tasks', features: ['Landing page / Portfolio', 'Bug fixes & tweaks', 'Script automation', '3-5 day delivery', '1 revision round'], featured: false },
     { name: 'Standard', range: '₹1,000 – ₹4,999', desc: 'Most popular for small businesses', features: ['Business website', 'Basic e-commerce', 'Admin dashboard', '7-14 day delivery', '3 revision rounds'], featured: true },
@@ -140,7 +160,7 @@ export default function Home() {
 
   return (
     <>
-
+      <ThreeBackground />
 
       <div ref={cursorRef} className="cursor" />
       <div ref={ringRef} className="cursor-ring" />
@@ -150,6 +170,7 @@ export default function Home() {
         <div className="nav-links">
           <a href="#about">About</a>
           <a href="#services">Services</a>
+          <a href="#projects">Projects</a>
           <a href="#pricing">Pricing</a>
           <a href="#order">Get Quote</a>
           <a href="/admin" style={{ color: 'var(--gray)', fontSize: '0.75rem' }}>Admin ↗</a>
@@ -158,19 +179,19 @@ export default function Home() {
       </nav>
 
       <section className="hero">
-        <div className="hero-bg" /><div className="hero-grid" />
+        <div className="hero-grid" />
         <div className="hero-content">
-          <div className="hero-tag">Available for Freelance Work</div>
-          <h1>I Build<br /><span className="line2">Digital Products</span><span className="line3">Web Apps · Mobile Apps · Custom Software</span></h1>
-          <p className="hero-desc">Hi, I'm Pushpendra Damor — a 3rd Year student with a passion for building clean, functional, and affordable digital solutions. Tell me what you need — I'll make it happen at a price that makes sense.</p>
+          <div className="hero-tag">Available for Premium Projects</div>
+          <h1>I Build<br /><span className="line2">Digital Excellence</span><span className="line3">Web Apps · E-Commerce · Custom Solutions</span></h1>
+          <p className="hero-desc">Hi, I'm Pushpendra Damor — a professional full-stack developer creating premium digital experiences with modern design and cutting-edge technology. Transform your ideas into reality.</p>
           <div className="hero-actions">
             <a href="#order" className="btn-primary">Submit Your Project →</a>
             <a href="#services" className="btn-outline">See What I Do</a>
           </div>
           <div className="hero-stat">
-            <div><div className="stat-n">30+</div><div className="stat-l">Projects Done</div></div>
-            <div><div className="stat-n">₹499</div><div className="stat-l">Starting Price</div></div>
-            <div><div className="stat-n">7d</div><div className="stat-l">Avg Delivery</div></div>
+            <div><div className="stat-n">30+</div><div className="stat-l">Projects Delivered</div></div>
+            <div><div className="stat-n">100%</div><div className="stat-l">Client Satisfaction</div></div>
+            <div><div className="stat-n">24h</div><div className="stat-l">Response Time</div></div>
           </div>
         </div>
       </section>
@@ -187,26 +208,26 @@ export default function Home() {
         <div className="about-grid">
           <div>
             <span className="section-tag reveal">// about.me</span>
-            <h2 className="section-title reveal">Pushpendra Damor.<br />Full-Stack Dev.</h2>
-            <p className="section-sub reveal">I'm a 3rd year BCA student who builds real-world web apps and mobile applications. I help individuals, startups, and small businesses get their ideas off the ground — without the agency price tag.</p>
-            <p className="section-sub reveal" style={{ marginTop: '1rem' }}>You submit your project requirements. I analyze it, quote a fair price, and deliver quality work on time. Simple as that.</p>
+            <h2 className="section-title reveal">Pushpendra Damor.<br />Full-Stack Developer.</h2>
+            <p className="section-sub reveal">I'm a professional full-stack developer specializing in creating premium digital experiences. I help businesses and individuals transform their ideas into sophisticated, high-performance web applications.</p>
+            <p className="section-sub reveal" style={{ marginTop: '1rem' }}>From concept to deployment, I deliver end-to-end solutions with focus on clean code, modern design, and exceptional user experience. Your vision, executed with precision.</p>
             <div className="about-skills reveal">{skills.map(s => <span key={s} className="skill-tag">{s}</span>)}</div>
           </div>
           <div className="about-visual reveal">
             <div className="code-block">
               <span className="cmt">// developer profile</span><br />
-              <span className="kw">const</span> <span className="fn">dev</span> = {'{'}<br />
+              <span className="kw">const</span> <span className="fn">developer</span> = {'{'}<br />
               &nbsp;&nbsp;name: <span className="str">"Pushpendra Damor"</span>,<br />
-              &nbsp;&nbsp;year: <span className="str">"3rd Year"</span>,<br />
-              &nbsp;&nbsp;role: <span className="str">"Full-Stack Dev"</span>,<br />
+              &nbsp;&nbsp;role: <span className="str">"Full-Stack Developer"</span>,<br />
+              &nbsp;&nbsp;focus: <span className="str">"Premium Digital Solutions"</span>,<br />
               &nbsp;&nbsp;skills: [<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;<span className="str">"PHP"</span>, <span className="str">"React"</span>,<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;<span className="str">"MySQL"</span>, <span className="str">"Node"</span><br />
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="str">"React"</span>, <span className="str">"Next.js"</span>,<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="str">"Node.js"</span>, <span className="str">"PHP"</span><br />
               &nbsp;&nbsp;],<br />
               &nbsp;&nbsp;<span className="fn">available</span>: <span className="kw">true</span>,<br />
-              &nbsp;&nbsp;<span className="fn">pricing</span>: <span className="str">"reasonable"</span><br />
+              &nbsp;&nbsp;<span className="fn">quality</span>: <span className="str">"premium"</span><br />
               {'}'};<br /><br />
-              <span className="kw">export default</span> <span className="fn">dev</span>;
+              <span className="kw">export default</span> <span className="fn">developer</span>;
             </div>
           </div>
         </div>
@@ -238,6 +259,33 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="projects" className="projects-bg">
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <span className="section-tag reveal">// featured_projects</span>
+          <h2 className="section-title reveal">Featured Work</h2>
+          <p className="section-sub reveal">A selection of projects that showcase my skills and attention to detail.</p>
+          <div className="projects-grid reveal">
+            {projects.map((project, index) => (
+              <div key={index} className={`project-card ${project.featured ? 'featured' : ''}`}>
+                <div className="project-header" style={{ borderColor: project.color }}>
+                  <h3>{project.title}</h3>
+                  {project.featured && <span className="featured-badge">Featured</span>}
+                </div>
+                <p className="project-desc">{project.description}</p>
+                <div className="project-tags">
+                  {project.tags.map((tag, i) => (
+                    <span key={i} className="project-tag" style={{ background: `${project.color}15`, color: project.color }}>{tag}</span>
+                  ))}
+                </div>
+                <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link" style={{ color: project.color }}>
+                  View Project →
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="pricing">
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <span className="section-tag reveal">// pricing.json</span>
@@ -258,7 +306,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section style={{ background: 'var(--surface)' }}>
+      <section style={{ background: 'var(--surface2)' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <span className="section-tag reveal">// how it works</span>
           <h2 className="section-title reveal">Simple Process</h2>
@@ -347,6 +395,7 @@ export default function Home() {
         <div className="footer-logo">pushp<span>-builds // Pushpendra Damor</span></div>
         <div className="footer-links">
           <a href="#about">About</a><a href="#services">Services</a>
+          <a href="#projects">Projects</a>
           <a href="#pricing">Pricing</a><a href="#order">Contact</a><a href="/admin">Admin</a>
         </div>
         <div className="footer-copy">© 2026 pushp-builds. Made with ♥</div>

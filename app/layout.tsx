@@ -6,8 +6,8 @@ const syne = Syne({ subsets: ['latin'], weight: ['400', '600', '700', '800'], va
 const spaceMono = Space_Mono({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-mono' })
 
 export const metadata: Metadata = {
-  title: 'DevFolio — Affordable Web & App Development',
-  description: '3rd Year BCA Student building affordable web apps, websites, and custom software. Submit your project and get a quote within 24 hours.',
+  title: 'Pushp Builds — Premium Web & App Development',
+  description: 'Professional full-stack developer creating premium digital solutions. From landing pages to full-stack applications with modern design and cutting-edge technology.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
