@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Space_Mono, Syne } from 'next/font/google'
 import './globals.css'
 
@@ -6,8 +6,12 @@ const syne = Syne({ subsets: ['latin'], weight: ['400', '600', '700', '800'], va
 const spaceMono = Space_Mono({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-mono' })
 
 export const metadata: Metadata = {
-  title: 'Pushp Builds — Premium Web & App Development',
+  title: 'pushp-craft — Premium Web & App Development',
   description: 'Professional full-stack developer creating premium digital solutions. From landing pages to full-stack applications with modern design and cutting-edge technology.',
+}
+
+export const viewport: Viewport = {
+  themeColor: '#05080a',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
