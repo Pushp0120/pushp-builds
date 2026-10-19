@@ -158,6 +158,20 @@ export default function Home() {
       featured: true
     },
     {
+      title: 'MS Facility Service',
+      description: 'Business website for a Surat cleaning company — deep cleaning, sofa & kitchen cleaning and bathroom sanitization, with service pricing and enquiry booking.',
+      tags: ['Next.js', 'React', 'Business Website', 'Service Booking'],
+      link: 'https://msfacilityservice.vercel.app/',
+      featured: false
+    },
+    {
+      title: 'S Kitchen Point',
+      description: 'Catalogue site for PVC furniture and aluminium modular kitchens in Bilimora — custom built-to-measure storage with free measurement and quote enquiry.',
+      tags: ['React', 'Vite', 'Catalogue', 'Lead Generation'],
+      link: 'https://skitchenpoint.vercel.app/',
+      featured: false
+    },
+    {
       title: 'Vasudhara Milk',
       description: 'E-commerce platform for dairy products with payment integration and order management.',
       tags: ['E-Commerce', 'PHP', 'MySQL', 'Payment Gateway'],
