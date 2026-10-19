@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import ThreeBackground from './components/ThreeBackground'
 
 const WHATSAPP_NUMBER = '919328366460' // +91 93283 66460
 
@@ -191,7 +190,12 @@ export default function Home() {
 
   return (
     <>
-      <ThreeBackground />
+      {/* animated CSS aurora background (replaces three.js) */}
+      <div className="aurora" aria-hidden="true">
+        <span className="orb orb1" />
+        <span className="orb orb2" />
+        <span className="orb orb3" />
+      </div>
 
       <div ref={cursorRef} className="cursor" />
       <div ref={ringRef} className="cursor-ring" />

@@ -48,6 +48,25 @@ body::before {
   pointer-events: none; z-index: 1;
 }
 
+/* ---------------- animated aurora background (replaces three.js) ---------------- */
+.aurora {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% -10%, rgba(46, 110, 255, 0.12), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 85% 110%, rgba(139, 92, 246, 0.12), transparent 60%);
+}
+.aurora .orb {
+  position: absolute; border-radius: 50%; filter: blur(85px);
+  mix-blend-mode: screen; will-change: transform; opacity: 0.55;
+}
+.aurora .orb1 { width: 46vw; height: 46vw; top: -12%; left: -10%; background: #2e8bff; animation: auroraDrift1 26s ease-in-out infinite; }
+.aurora .orb2 { width: 44vw; height: 44vw; bottom: -14%; right: -8%; background: #7c5cff; animation: auroraDrift2 32s ease-in-out infinite; }
+.aurora .orb3 { width: 32vw; height: 32vw; top: 38%; left: 42%; background: #a855f7; opacity: 0.38; animation: auroraDrift3 38s ease-in-out infinite; }
+@keyframes auroraDrift1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(9vw, 7vh) scale(1.14); } }
+@keyframes auroraDrift2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-8vw, -6vh) scale(1.10); } }
+@keyframes auroraDrift3 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-7vw, 8vh) scale(1.18); } }
+@media (prefers-reduced-motion: reduce) { .aurora .orb { animation: none; } }
+
 ::selection { background: rgba(110, 122, 255, 0.32); color: #fff; }
 
 ::-webkit-scrollbar { width: 9px; }
