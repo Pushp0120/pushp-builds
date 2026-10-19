@@ -93,10 +93,10 @@ export default function ThreeBackground() {
           float d = length(gl_PointCoord - 0.5);
           if (d > 0.5) discard;
           float glow = pow(1.0 - d * 2.0, 2.2);
-          vec3 mint  = vec3(0.30, 1.00, 0.75);
-          vec3 teal  = vec3(0.00, 0.83, 0.67);
-          vec3 white = vec3(0.88, 1.00, 0.95);
-          vec3 col = mix(teal, mint, vTint);
+          vec3 blue   = vec3(0.18, 0.55, 1.00);
+          vec3 violet = vec3(0.62, 0.40, 1.00);
+          vec3 white  = vec3(0.90, 0.94, 1.00);
+          vec3 col = mix(blue, violet, vTint);
           col = mix(col, white, glow * 0.55);
           gl_FragColor = vec4(col, glow * vAlpha);
         }
@@ -116,7 +116,7 @@ export default function ThreeBackground() {
     // ---------- wireframe icosahedron core ----------
     const coreGeo = new THREE.IcosahedronGeometry(9, 1)
     const coreMat = new THREE.MeshBasicMaterial({
-      color: 0x22d3a5, wireframe: true, transparent: true, opacity: 0.09, blending: THREE.AdditiveBlending, depthWrite: false
+      color: 0x5b6cff, wireframe: true, transparent: true, opacity: 0.10, blending: THREE.AdditiveBlending, depthWrite: false
     })
     const core = new THREE.Mesh(coreGeo, coreMat)
     core.position.set(6, 0, -14)
@@ -127,9 +127,9 @@ export default function ThreeBackground() {
     c.width = c.height = 128
     const ctx = c.getContext('2d')!
     const g = ctx.createRadialGradient(64, 64, 0, 64, 64, 64)
-    g.addColorStop(0, 'rgba(45, 212, 168, 0.9)')
-    g.addColorStop(0.4, 'rgba(45, 212, 168, 0.25)')
-    g.addColorStop(1, 'rgba(45, 212, 168, 0)')
+    g.addColorStop(0, 'rgba(78, 120, 255, 0.9)')
+    g.addColorStop(0.4, 'rgba(120, 90, 255, 0.28)')
+    g.addColorStop(1, 'rgba(120, 90, 255, 0)')
     ctx.fillStyle = g
     ctx.fillRect(0, 0, 128, 128)
     const glowTex = new THREE.CanvasTexture(c)

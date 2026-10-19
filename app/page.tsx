@@ -1,6 +1,32 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import ThreeBackground from './components/ThreeBackground'
+
+const WHATSAPP_NUMBER = '919328366460' // +91 93283 66460
+
+function buildWhatsAppLink(data: Record<string, FormDataEntryValue>): string {
+  const label = (v: string) => (v && v.trim() ? v : '—')
+  const typeLabels: Record<string, string> = { website: 'Website', app: 'Web App', both: 'Website + App', other: 'Other' }
+  const lines = [
+    'Hello Pushp Codes! 👋 I\'d like to start a project.',
+    '',
+    `👤 Name: ${label(String(data.name || ''))}`,
+    `📧 Email: ${label(String(data.email || ''))}`,
+    `📱 Phone: ${label(String(data.phone || ''))}`,
+    `🧭 Project Type: ${typeLabels[String(data.project_type || '')] || label(String(data.project_type || ''))}`,
+    `📌 Project: ${label(String(data.project_name || ''))}`,
+    '',
+    `📝 Description:`,
+    label(String(data.description || '')),
+    '',
+    `✨ Features: ${label(String(data.features || ''))}`,
+    `💰 Budget: ${label(String(data.budget_range || ''))}`,
+    `⏱ Timeline: ${label(String(data.timeline || ''))}`,
+    `🔗 References: ${label(String(data.reference_links || ''))}`,
+  ]
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`
+}
 
 export default function Home() {
   const [submitting, setSubmitting] = useState(false)
@@ -90,19 +116,24 @@ export default function Home() {
     }
     setFieldErrors({})
     setSubmitting(true)
+
+    // 1) Open WhatsApp with the full enquiry pre-filled (primary lead channel).
+    const waLink = buildWhatsAppLink(data)
+    window.open(waLink, '_blank', 'noopener,noreferrer')
+
+    setFormMsg({ type: 'success', text: '✓ Opening WhatsApp with your project details… If nothing opened, tap the green button or the link below.' })
+    showToast('Opening WhatsApp…', 'success')
+    form.reset()
+
+    // 2) Also save a copy to the dashboard (best-effort; never blocks WhatsApp).
     try {
-      const res = await fetch('/api/projects', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
-      const json = await res.json()
-      if (json.success) {
-        setFormMsg({ type: 'success', text: "✓ Project submitted! I'll review it and email you within 24 hours with a quote." })
-        showToast('Project submitted successfully!', 'success')
-        form.reset()
-      } else {
-        setFormMsg({ type: 'error', text: '✗ ' + (json.error || 'Something went wrong.') })
-        showToast('Submission failed.', 'error')
-      }
+      await fetch('/api/projects', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
     } catch {
-      setFormMsg({ type: 'error', text: '✗ Network error. Please try again.' })
+      /* database optional — WhatsApp already captured the lead */
     }
     setSubmitting(false)
   }
@@ -152,7 +183,13 @@ export default function Home() {
       <div ref={ringRef} className="cursor-ring" />
 
       <nav id="navbar">
-        <a href="#" className="nav-logo">pushp<em>-</em>craft<em>_</em></a>
+        <a href="#" className="nav-brand">
+          <Image src="/logo-mark.png" alt="Pushp Codes logo" width={40} height={40} className="nav-logo-img" priority />
+          <span className="nav-wordmark">
+            Pushp <b>Codes</b>
+            <span className="nav-tagline">Build · Learn · Create</span>
+          </span>
+        </a>
         <div className="nav-links">
           <a href="#about">About</a>
           <a href="#services">Services</a>
@@ -167,14 +204,15 @@ export default function Home() {
       <section className="hero">
         <div className="hero-inner">
           <div className="hero-tag"><span className="pulse" />Available for premium projects</div>
+          <Image src="/logo-mark.png" alt="Pushp Codes" width={190} height={190} className="hero-logo" priority />
           <h1>
             I craft <span className="hl">digital</span><br />
             <span className="hl">excellence</span>
             <span className="strike">generic templates</span>
             <span className="tagline">Web Apps · E-Commerce · Custom Builds</span>
- </h1>
+          </h1>
           <p className="hero-desc">
-            Hi, I&apos;m <strong>Pushpendra Damor</strong> — a full-stack developer creating premium digital experiences
+            Hi, I&apos;m <strong>Pushpendra Damor</strong> — a full-stack developer behind <strong>Pushp Codes</strong>, crafting premium digital experiences
             with modern design and cutting-edge technology. Transform your ideas into reality.
           </p>
           <div className="hero-actions">
@@ -219,8 +257,8 @@ export default function Home() {
               <span className="cmt">// developer profile</span><br />
               <span className="kw">const</span> <span className="fn">developer</span> = {'{'}<br />
               &nbsp;&nbsp;name: <span className="str">&quot;Pushpendra Damor&quot;</span>,<br />
+              &nbsp;&nbsp;brand: <span className="str">&quot;Pushp Codes&quot;</span>,<br />
               &nbsp;&nbsp;role: <span className="str">&quot;Full-Stack Developer&quot;</span>,<br />
-              &nbsp;&nbsp;focus: <span className="str">&quot;Premium Digital Solutions&quot;</span>,<br />
               &nbsp;&nbsp;skills: [<br />
               &nbsp;&nbsp;&nbsp;&nbsp;<span className="str">&quot;React&quot;</span>, <span className="str">&quot;Next.js&quot;</span>,<br />
               &nbsp;&nbsp;&nbsp;&nbsp;<span className="str">&quot;Node.js&quot;</span>, <span className="str">&quot;PHP&quot;</span><br />
@@ -315,7 +353,7 @@ export default function Home() {
           <div className="process-steps">
             {[
               ['01', 'Submit Request', 'Fill out the form with your project details, features needed, and budget range.'],
-              ['02', 'Get a Quote', 'I review your request within 24 hours and send you a detailed price quote.'],
+              ['02', 'Get a Quote', 'I review your request within 24 hours and send you a detailed price quote on WhatsApp.'],
               ['03', 'Agree & Start', 'Once you accept the quote, I start building. No upfront payment required.'],
               ['04', 'Review & Deliver', 'You review the work, request changes, and I deliver the final files to you.'],
             ].map(([n, t, d]) => (
@@ -333,7 +371,7 @@ export default function Home() {
         <div style={{ maxWidth: '1150px', margin: '0 auto' }}>
           <span className="section-tag reveal">Submit project</span>
           <h2 className="section-title reveal">Start Your Project</h2>
-          <p className="section-sub reveal">Tell me what you need. I&apos;ll review it and get back to you within 24 hours with a quote.</p>
+          <p className="section-sub reveal">Tell me what you need. Submitting opens WhatsApp with your details pre-filled — I&apos;ll reply within 24 hours with a quote.</p>
           <div className="form-container">
             <form className="form-grid" onSubmit={handleSubmit}>
               <div className="form-field reveal">
@@ -387,10 +425,21 @@ export default function Home() {
               <div className="form-field full reveal"><label>Reference Links / Examples</label><input type="text" name="reference_links" placeholder="Websites or apps you like the look of (optional)" /></div>
               <div className="form-field full">
                 <div className="form-submit">
-                  <button type="submit" className="btn-submit" disabled={submitting}>{submitting ? 'Submitting...' : 'Submit Project →'}</button>
-                  <span className="form-note">I&apos;ll reply within 24 hours. No spam, ever.</span>
+                  <button type="submit" className="btn-submit" disabled={submitting}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
+                    {submitting ? 'Opening WhatsApp…' : 'Submit Project on WhatsApp →'}
+                  </button>
+                  <span className="form-note">Opens WhatsApp with your details. I&apos;ll reply within 24 hours.</span>
                 </div>
                 {formMsg && <div className={`form-msg ${formMsg.type}`}>{formMsg.text}</div>}
+                {formMsg?.type === 'success' && (
+                  <div className="form-msg" style={{ marginTop: '0.6rem' }}>
+                    Or message directly:&nbsp;
+                    <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi Pushp Codes! I'd like to discuss a project.")}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent3)' }}>
+                      WhatsApp +91 93283 66460 →
+                    </a>
+                  </div>
+                )}
               </div>
             </form>
           </div>
@@ -398,7 +447,10 @@ export default function Home() {
       </section>
 
       <footer>
-        <div className="footer-logo">pushp<em>-</em>craft <span>// Pushpendra Damor</span></div>
+        <div className="footer-brand">
+          <Image src="/logo-mark.png" alt="Pushp Codes logo" width={46} height={46} className="footer-logo-img" />
+          <div className="footer-logo">Pushp <b>Codes</b><span>Build · Learn · Create</span></div>
+        </div>
         <div className="footer-links">
           <a href="#about">About</a>
           <a href="#services">Services</a>
@@ -407,8 +459,18 @@ export default function Home() {
           <a href="#order">Contact</a>
           <a href="/admin">Admin</a>
         </div>
-        <div className="footer-copy">© 2026 pushp-craft. Crafted in the dark.</div>
+        <div className="footer-copy">© 2026 Pushp Codes · Pushpendra Damor</div>
       </footer>
+
+      <a
+        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi Pushp Codes! I'd like to discuss a project.")}`}
+        className="wa-float"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+      >
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
+      </a>
 
       {toast.show && <div className={`toast ${toast.type}`}>{toast.text}</div>}
     </>
