@@ -25,19 +25,26 @@ export default function AdminLogin() {
     <>
       <style>{`
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-        body{background:#05080a;color:#eafff7;font-family:var(--font-syne),sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;background-image:radial-gradient(circle at 20% 50%,rgba(45,212,168,.07),transparent 50%),radial-gradient(circle at 80% 20%,rgba(20,184,148,.05),transparent 40%);}
-        .box{width:100%;max-width:420px;padding:2.5rem;border:1px solid rgba(45,212,168,.18);background:rgba(10,16,19,.55);backdrop-filter:blur(12px);clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));}
-        h1{font-family:var(--font-mono),monospace;font-size:1.4rem;color:#2dd4a8;margin-bottom:.3rem;}
-        p{color:#9db4ac;font-size:.85rem;margin-bottom:2rem;}
-        label{display:block;font-size:.72rem;color:#6b837b;letter-spacing:.14em;text-transform:uppercase;font-family:var(--font-mono),monospace;margin-bottom:.45rem;}
-        input{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(148,233,208,.12);color:#eafff7;padding:.85rem 1rem;font-family:var(--font-mono),monospace;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:1.2rem;}
-        input:focus{border-color:#2dd4a8;box-shadow:0 0 0 3px rgba(45,212,168,.12);}
-        .btn{width:100%;background:linear-gradient(135deg,#2dd4a8,#14b894);color:#04241c;border:none;padding:.9rem;font-family:var(--font-syne),sans-serif;font-weight:800;font-size:.92rem;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:all .25s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));}
-        .btn:hover:not(:disabled){filter:brightness(1.1);box-shadow:0 0 30px rgba(45,212,168,.35);} .btn:disabled{opacity:.6;cursor:not-allowed;}
+        body{background:#05060b;color:#eef1ff;font-family:var(--font-syne),sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;cursor:auto !important;overflow-x:hidden;}
+        body::before{display:none !important;}
+        .box{position:relative;z-index:2;width:100%;max-width:420px;padding:2.5rem;border:1px solid rgba(110,122,255,.22);background:rgba(9,11,20,.62);backdrop-filter:blur(14px);clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));animation:boxIn .5s ease both;}
+        @keyframes boxIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+        h1{font-family:var(--font-mono),monospace;font-size:1.4rem;margin-bottom:.3rem;background:linear-gradient(120deg,#2e8bff,#a855f7);-webkit-background-clip:text;background-clip:text;color:transparent;}
+        p{color:#9aa3c0;font-size:.85rem;margin-bottom:2rem;}
+        label{display:block;font-size:.72rem;color:#6b7292;letter-spacing:.14em;text-transform:uppercase;font-family:var(--font-mono),monospace;margin-bottom:.45rem;}
+        input{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(122,140,255,.16);color:#eef1ff;padding:.85rem 1rem;font-family:var(--font-mono),monospace;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:1.2rem;}
+        input:focus{border-color:#6d5cff;box-shadow:0 0 0 3px rgba(110,122,255,.14);}
+        .btn{width:100%;background:linear-gradient(135deg,#2e8bff,#8b5cf6);color:#fff;border:none;padding:.9rem;font-family:var(--font-syne),sans-serif;font-weight:800;font-size:.92rem;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:all .25s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));}
+        .btn:hover:not(:disabled){filter:brightness(1.1);box-shadow:0 0 30px rgba(110,122,255,.4);} .btn:disabled{opacity:.6;cursor:not-allowed;}
         .err{background:rgba(255,94,87,.08);border:1px solid rgba(255,94,87,.3);color:#ff8a85;padding:.8rem;margin-bottom:1.2rem;font-size:.85rem;font-family:var(--font-mono),monospace;}
-        .back{display:block;text-align:center;margin-top:1.5rem;color:#6b837b;font-size:.8rem;text-decoration:none;font-family:var(--font-mono),monospace;}
-        .back:hover{color:#2dd4a8;}
+        .back{display:block;text-align:center;margin-top:1.5rem;color:#6b7292;font-size:.8rem;text-decoration:none;font-family:var(--font-mono),monospace;}
+        .back:hover{color:#8b5cf6;}
       `}</style>
+      <div className="aurora" aria-hidden="true">
+        <span className="orb orb1" />
+        <span className="orb orb2" />
+        <span className="orb orb3" />
+      </div>
       <div className="box">
         <h1>// ADMIN</h1>
         <p>Restricted access. Authorized personnel only.</p>

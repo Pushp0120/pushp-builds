@@ -123,14 +123,14 @@ body { cursor: none; }
 }
 @media (hover: none) { body { cursor: auto; } .cursor, .cursor-ring { display: none; } }
 
-/* ---------------- nav ---------------- */
-nav {
+/* ---------------- nav (scoped to the marketing site navbar only) ---------------- */
+#navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0.85rem 2.5rem; transition: all 0.35s;
   border-bottom: 1px solid transparent;
 }
-nav.scrolled {
+#navbar.scrolled {
   background: rgba(5, 6, 11, 0.72); backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px); border-color: var(--border);
 }
@@ -453,7 +453,7 @@ footer { border-top: 1px solid var(--border); padding: 3rem 2.5rem; display: fle
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
 }
 @media (max-width: 768px) {
-  nav { padding: 0.7rem 1.2rem; }
+  #navbar { padding: 0.7rem 1.2rem; }
   .nav-links { display: none; }
   .nav-wordmark, .nav-tagline { display: none; }
   .nav-logo-img { height: 34px; }
